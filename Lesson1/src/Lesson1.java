@@ -26,6 +26,9 @@ public class Lesson1 {
         char c3 = 'y';
         System.out.println("Character from symbol - " + c3);
 
+        boolean bool = true;
+        System.out.println("Boolean - "  + bool);
+
 
         String str = "This is string";
         System.out.println(str);
