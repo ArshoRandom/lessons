@@ -8,6 +8,8 @@ public class Lesson1 {
         System.out.println("Integer - " + i);
         long l = 15899747455L;
         System.out.println("Long - " + l);
+        short sh = 255;
+        System.out.println("Short - " + sh);
 
 
 
