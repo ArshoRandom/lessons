@@ -1,3 +1,9 @@
+package am.picsart.lessons;
+
+/**
+ * @author Arshak Papoyan
+ */
+
 public class Lesson1 {
 
     public static void main(String[] args) {
