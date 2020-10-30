@@ -53,9 +53,9 @@ public class Lesson2 {
             arrayForTask4[i] = i;
         }
         for (int i = 0; i < arrayForTask4.length; i++) {
-            boolean isDivisibleByFive = ((arrayForTask2[i] % 10) == 5) || ((arrayForTask2[i] % 10) == 0);
+            boolean isDivisibleByFive = ((arrayForTask4[i] % 10) == 5) || ((arrayForTask4[i] % 10) == 0);
             if (isDivisibleByFive) {
-                System.out.print(arrayForTask2[i] + " ");
+                System.out.print(arrayForTask4[i] + " ");
             }
         }
         System.out.println();
