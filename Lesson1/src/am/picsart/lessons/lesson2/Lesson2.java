@@ -1,4 +1,6 @@
-package am.picsart.lessons;
+package am.picsart.lessons.lesson2;
+
+import java.util.Arrays;
 
 /**
  * @author Arshak Papoyan

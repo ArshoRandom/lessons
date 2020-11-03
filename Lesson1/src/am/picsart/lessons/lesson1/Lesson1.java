@@ -1,4 +1,4 @@
-package am.picsart.lessons;
+package am.picsart.lessons.lesson1;
 
 /**
  * @author Arshak Papoyan
