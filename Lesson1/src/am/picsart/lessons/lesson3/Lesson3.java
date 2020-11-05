@@ -29,11 +29,11 @@ public class Lesson3 {
         System.out.println();
         System.out.println("Bubble sort demonstration");
 
-        BubbleSortDemo bubbleSortDemo = new BubbleSortDemo();
+        SortingAlgorithmsDemo sortDemo = new SortingAlgorithmsDemo();
 
         int[] array = {1, 88, 0, -25, 8888, 1414, 122, 0, 0, 0, 223, 3, -1547};
-        bubbleSortDemo.sort(array);
+        sortDemo.selectionSort(array);
 
-        bubbleSortDemo.printArray(array);
+        sortDemo.printArray(array);
     }
 }
