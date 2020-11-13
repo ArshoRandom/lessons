@@ -1,0 +1,27 @@
+package am.picsart.lessons.lesson4.rocketweapons;
+
+public class MultipleRocketLauncher extends RocketLongRangeWeapon {
+
+    private int rateOfFire;
+
+    public MultipleRocketLauncher() {
+        this.rateOfFire = 30;
+    }
+
+    public int getRateOfFire() {
+        return rateOfFire;
+    }
+
+    public void setRateOfFire(int rateOfFire) {
+        if (rateOfFire >= 5 && rateOfFire <= 40)
+            this.rateOfFire = rateOfFire;
+        else
+            System.out.println("Invalid rate of fire : " + rateOfFire);
+    }
+
+    @Override
+    public void printCharacteristics() {
+        super.printCharacteristics();
+        System.out.printf("Rate of fire : %d\n", rateOfFire);
+    }
+}
