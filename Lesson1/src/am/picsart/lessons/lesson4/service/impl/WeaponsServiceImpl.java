@@ -15,7 +15,7 @@ public class WeaponsServiceImpl implements WeaponsService {
         System.out.printf("Distance : %f\n", abstractHeavyLongRangeWeapon.getDistance());
         System.out.printf("Personal count : %d\n", abstractHeavyLongRangeWeapon.getPersonnelCount());
         System.out.printf("Caliber : %f\n", abstractHeavyLongRangeWeapon.getCaliber());
-        System.out.printf("Year : %d\n", abstractHeavyLongRangeWeapon.getYear());
+        System.out.printf("Year of production : %d\n", abstractHeavyLongRangeWeapon.getYearOfProduction());
 
     }
 

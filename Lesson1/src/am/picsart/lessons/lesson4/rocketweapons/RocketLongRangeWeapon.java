@@ -1,8 +1,8 @@
 package am.picsart.lessons.lesson4.rocketweapons;
 
-import am.picsart.lessons.lesson4.base.HeavyLongRangeWeapon;
+import am.picsart.lessons.lesson4.base.AbstractHeavyLongRangeWeapon;
 
-public class RocketLongRangeWeapon extends HeavyLongRangeWeapon {
+public class RocketLongRangeWeapon extends AbstractHeavyLongRangeWeapon {
 
     private int rocketCount;
 
@@ -19,11 +19,5 @@ public class RocketLongRangeWeapon extends HeavyLongRangeWeapon {
             this.rocketCount = rocketCount;
         else
             System.out.println("Invalid rockets count : " + rocketCount);
-    }
-
-    @Override
-    public void printCharacteristics() {
-        super.printCharacteristics();
-        System.out.printf("Rockets count : %d\n", rocketCount);
     }
 }

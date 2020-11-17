@@ -1,34 +1,28 @@
 package am.picsart.lessons.lesson4;
 
-import am.picsart.lessons.lesson4.rocketweapons.airdefence.AirDefenceRocketSystem;
+import am.picsart.lessons.lesson4.airdefence.AirDefenceRocketSystem;
 import am.picsart.lessons.lesson4.artillery.Artillery;
 import am.picsart.lessons.lesson4.artillery.AutomotiveArtillery;
-import am.picsart.lessons.lesson4.base.HeavyLongRangeWeapon;
 import am.picsart.lessons.lesson4.rocketweapons.MultipleRocketLauncher;
 import am.picsart.lessons.lesson4.rocketweapons.RocketLongRangeWeapon;
+import am.picsart.lessons.lesson4.service.WeaponsService;
+import am.picsart.lessons.lesson4.service.impl.WeaponsServiceImpl;
 
 public class Lesson4WeaponsDemo {
 
     public static void main(String[] args) {
 
-        HeavyLongRangeWeapon heavyLongRangeWeapon = new HeavyLongRangeWeapon();
-        heavyLongRangeWeapon.setCountry("USSR");
-        heavyLongRangeWeapon.setCaliber(82);
-        heavyLongRangeWeapon.setModel("BM 36");
-        heavyLongRangeWeapon.setDistance(3000);
-        heavyLongRangeWeapon.setPersonnelCount(3);
-        heavyLongRangeWeapon.printCharacteristics();
-        System.out.println("--------------------------------");
+        WeaponsService weaponsService = new WeaponsServiceImpl();
 
         Artillery artillery = new Artillery();
         artillery.setModel("D30");
         artillery.setCountry("USSR");
         artillery.setDistance(15000);
         artillery.setCaliber(122);
-        artillery.setPersonnelCount(6);
         artillery.setFlat(false);
-        artillery.printCharacteristics();
-        System.out.println("--------------------------------");
+        artillery.setPersonnelCount(6);
+        artillery.setYearOfProduction(2000);
+        weaponsService.printCharacteristics(artillery);
 
         MultipleRocketLauncher multipleRocketLauncher = new MultipleRocketLauncher();
         multipleRocketLauncher.setCountry("USSR");
@@ -38,30 +32,30 @@ public class Lesson4WeaponsDemo {
         multipleRocketLauncher.setPersonnelCount(4);
         multipleRocketLauncher.setRocketCount(12);
         multipleRocketLauncher.setRateOfFire(40);
-        multipleRocketLauncher.printCharacteristics();
-        System.out.println("--------------------------------");
+        multipleRocketLauncher.setYearOfProduction(1995);
+        weaponsService.printCharacteristics(multipleRocketLauncher);
 
         AutomotiveArtillery automotiveArtillery = new AutomotiveArtillery();
         automotiveArtillery.setCountry("Sweden");
-        automotiveArtillery.setFlat(false);
         automotiveArtillery.setModel("Archer");
         automotiveArtillery.setCaliber(155);
         automotiveArtillery.setDistance(30000);
         automotiveArtillery.setPersonnelCount(3);
         automotiveArtillery.setPlatformType("Volvo");
-        automotiveArtillery.printCharacteristics();
+        automotiveArtillery.setFlat(false);
+        automotiveArtillery.setYearOfProduction(2007);
+        weaponsService.printCharacteristics(automotiveArtillery);
 
-        System.out.println("--------------------------------");
         RocketLongRangeWeapon rocketLongRangeWeapon = new RocketLongRangeWeapon();
         rocketLongRangeWeapon.setRocketCount(1);
         rocketLongRangeWeapon.setCountry("USSR");
         rocketLongRangeWeapon.setCaliber(640);
-        rocketLongRangeWeapon.setDistance(120000);
+        rocketLongRangeWeapon.setDistance(120_000);
         rocketLongRangeWeapon.setModel("Tochka U");
         rocketLongRangeWeapon.setPersonnelCount(3);
-        rocketLongRangeWeapon.printCharacteristics();
+        rocketLongRangeWeapon.setYearOfProduction(2004);
+        weaponsService.printCharacteristics(rocketLongRangeWeapon);
 
-        System.out.println("--------------------------------");
         AirDefenceRocketSystem airDefenceRocketSystem = new AirDefenceRocketSystem();
         airDefenceRocketSystem.setCountry("Russia");
         airDefenceRocketSystem.setModel("BUK M1");
@@ -70,10 +64,27 @@ public class Lesson4WeaponsDemo {
         airDefenceRocketSystem.setDistance(45000);
         airDefenceRocketSystem.setRocketCount(4);
         airDefenceRocketSystem.setCaliber(400);
-        airDefenceRocketSystem.printCharacteristics();
+        airDefenceRocketSystem.setYearOfProduction(1999);
+        weaponsService.printCharacteristics(airDefenceRocketSystem);
+
+        int weaponsCountsArtillery = weaponsService.getCountOfDefenders(artillery, 250_000, 5000);
+        int weaponsCountsMRL = weaponsService.getCountOfDefenders(multipleRocketLauncher, 250_000, 5000);
+        int weaponsCountsAutoArtillery = weaponsService.getCountOfDefenders(automotiveArtillery, 250_000, 5000);
+        int weaponsCountsRockets = weaponsService.getCountOfDefenders(rocketLongRangeWeapon, 250_000, 5000);
+        int weaponsCountsADS = weaponsService.getCountOfDefenders(airDefenceRocketSystem, 250_000, 5000);
+
+        System.out.println();
+        System.out.println("For 250km front length and 10km dept targets");
+        System.out.println("Artillery - " + weaponsCountsArtillery);
+        System.out.println("MRL - " + weaponsCountsMRL);
+        System.out.println("Rockets - " + weaponsCountsRockets);
+        System.out.println("Automatic artillery - " + weaponsCountsAutoArtillery);
+        System.out.println("ADS - " + weaponsCountsADS);
+
+        artillery.isSubjectOfUpdate();
+
 
     }
-
 
 
 }

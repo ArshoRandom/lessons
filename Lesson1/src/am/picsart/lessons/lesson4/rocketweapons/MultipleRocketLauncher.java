@@ -19,9 +19,4 @@ public class MultipleRocketLauncher extends RocketLongRangeWeapon {
             System.out.println("Invalid rate of fire : " + rateOfFire);
     }
 
-    @Override
-    public void printCharacteristics() {
-        super.printCharacteristics();
-        System.out.printf("Rate of fire : %d\n", rateOfFire);
-    }
 }

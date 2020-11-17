@@ -2,11 +2,11 @@ package am.picsart.lessons.lesson4.artillery;
 
 import am.picsart.lessons.lesson4.base.AbstractHeavyLongRangeWeapon;
 
-public class AutomotiveAbstractHeavyLongRangeWeapon extends AbstractHeavyLongRangeWeapon {
+public class AutomotiveArtillery extends Artillery {
 
     private String platformType;
 
-    public AutomotiveAbstractHeavyLongRangeWeapon() {
+    public AutomotiveArtillery() {
         this.platformType = this.defaultStrValue;
     }
 
@@ -21,10 +21,4 @@ public class AutomotiveAbstractHeavyLongRangeWeapon extends AbstractHeavyLongRan
             System.out.println("Invalid platform type : " + platformType);
     }
 
-
-    @Override
-    public void printCharacteristics() {
-        super.printCharacteristics();
-        System.out.printf("Platform type : %s\n", platformType);
-    }
 }

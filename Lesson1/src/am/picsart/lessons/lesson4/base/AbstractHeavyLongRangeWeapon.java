@@ -1,42 +1,40 @@
 package am.picsart.lessons.lesson4.base;
 
-import am.picsart.lessons.lesson4.base.HeavyLongRangeWeapon;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Artillery implements HeavyLongRangeWeapon {
+public class AbstractHeavyLongRangeWeapon implements HeavyLongRangeWeapon {
 
     private String model;
     private String country;
     private double distance;
     private int personnelCount;
     private double caliber;
-    private int year;
+    private int yearOfProduction;
 
     protected String defaultStrValue = "SECRET";
 
 
-    public Artillery() {
+    public AbstractHeavyLongRangeWeapon() {
         this.model = this.defaultStrValue;
         this.country = this.defaultStrValue;
         this.caliber = 120;
         this.personnelCount = 5;
         this.distance = 5000;
-        this.year = 2000;
+        this.yearOfProduction = 2000;
     }
 
-    public int getYear() {
-        return year;
+    public int getYearOfProduction() {
+        return yearOfProduction;
     }
 
-    public void setYear(int year) {
+    public void setYearOfProduction(int yearOfProduction) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
         String currentYear = sdf.format(new Date());
-        if (year >= 1950 && year <= Integer.parseInt(currentYear))
-            this.year = year;
+        if (yearOfProduction >= 1950 && yearOfProduction <= Integer.parseInt(currentYear))
+            this.yearOfProduction = yearOfProduction;
         else
-            System.out.println("Invalid year : " + year);
+            System.out.println("Invalid year : " + yearOfProduction);
     }
 
     public String getModel() {
@@ -101,11 +99,11 @@ public class Artillery implements HeavyLongRangeWeapon {
 
     @Override
     public boolean isSubjectOfUpdate() {
-        return this.year >= 1980;
+        return this.yearOfProduction >= 1980;
     }
 
     @Override
     public boolean notSuitable() {
-        return this.year < 1980;
+        return this.yearOfProduction < 1980;
     }
 }

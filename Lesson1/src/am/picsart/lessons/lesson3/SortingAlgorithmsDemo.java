@@ -4,9 +4,11 @@ package am.picsart.lessons.lesson3;
  * @author Arshak Papoyan
  */
 
-public class SortingAlgorithmsDemo {
+public class SortingAlgorithmsDemo{
+
 
     public void printArray(int[] array) {
+
         for (int element : array) {
             System.out.print(element + "  ");
         }
@@ -62,4 +64,37 @@ public class SortingAlgorithmsDemo {
         array[index2] = temp;
     }
 
+
+    public void mergeSort(int[] array) {
+
+        if (array.length >= 2) {
+            int[] left = new int[array.length >> 1];
+            int[] right = new int[array.length - left.length];
+            System.arraycopy(array, 0, left, 0, left.length);
+            System.arraycopy(array, left.length, right, 0, right.length);
+            mergeSort(left);
+            mergeSort(right);
+            merge(array, left, right);
+        }
+    }
+
+    private void merge(int[] array, int[] left, int[] right) {
+
+        int leftIndex = 0;
+        int rightIndex = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (leftIndex < left.length && rightIndex < right.length) {
+                if (left[leftIndex] <= right[rightIndex]) {
+                    array[i] = left[leftIndex++];
+                } else {
+                    array[i] = right[rightIndex++];
+                }
+            } else if (leftIndex < left.length) {
+                array[i] = left[leftIndex++];
+            } else {
+                array[i] = right[rightIndex++];
+            }
+        }
+
+    }
 }

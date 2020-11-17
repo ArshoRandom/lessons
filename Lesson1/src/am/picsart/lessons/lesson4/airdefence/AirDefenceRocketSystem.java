@@ -1,4 +1,4 @@
-package am.picsart.lessons.lesson4.rocketweapons.airdefence;
+package am.picsart.lessons.lesson4.airdefence;
 
 import am.picsart.lessons.lesson4.rocketweapons.RocketLongRangeWeapon;
 
@@ -15,12 +15,10 @@ public class AirDefenceRocketSystem extends RocketLongRangeWeapon {
     }
 
     public void setDetectionRadius(double detectionRadius) {
-        this.detectionRadius = detectionRadius;
+        if (detectionRadius >= 10_000 && detectionRadius <= 400_000)
+            this.detectionRadius = detectionRadius;
+        else
+            System.out.println("Invalid detection radius : " + detectionRadius);
     }
 
-    @Override
-    public void printCharacteristics() {
-        super.printCharacteristics();
-        System.out.printf("Detection radius : %f", detectionRadius);
-    }
 }
