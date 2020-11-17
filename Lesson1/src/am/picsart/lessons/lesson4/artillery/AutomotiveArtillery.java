@@ -1,10 +1,12 @@
 package am.picsart.lessons.lesson4.artillery;
 
-public class AutomotiveArtillery extends Artillery {
+import am.picsart.lessons.lesson4.base.AbstractHeavyLongRangeWeapon;
+
+public class AutomotiveAbstractHeavyLongRangeWeapon extends AbstractHeavyLongRangeWeapon {
 
     private String platformType;
 
-    public AutomotiveArtillery() {
+    public AutomotiveAbstractHeavyLongRangeWeapon() {
         this.platformType = this.defaultStrValue;
     }
 
