@@ -1,5 +1,7 @@
 package am.picsart.lessons.lesson3;
 
+import java.util.Arrays;
+
 /**
  * @author Arshak Papoyan
  */
@@ -7,14 +9,14 @@ package am.picsart.lessons.lesson3;
 public class SortingAlgorithmsDemo{
 
 
-    public void printArray(int[] array) {
+    public static void printArray(int[] array) {
 
         for (int element : array) {
             System.out.print(element + "  ");
         }
     }
 
-    public void bubbleSort(int[] array) {
+    public static void bubbleSort(int[] array) {
         if (array.length <= 1) {
             return;
         }
@@ -27,7 +29,7 @@ public class SortingAlgorithmsDemo{
         }
     }
 
-    public void selectionSort(int[] arr){
+    public static void selectionSort(int[] arr){
         if (arr.length <= 1) {
             return;
         }
@@ -41,7 +43,7 @@ public class SortingAlgorithmsDemo{
 
     }
 
-    public void insertionSort(int[] arr) {
+    public static void insertionSort(int[] arr) {
         if (arr.length <= 1) {
             return;
         }
@@ -57,7 +59,7 @@ public class SortingAlgorithmsDemo{
 
     }
 
-    private void swapByIndex(int[] array, int index1, int index2) {
+    private static void swapByIndex(int[] array, int index1, int index2) {
         int temp;
         temp = array[index1];
         array[index1] = array[index2];
@@ -65,23 +67,31 @@ public class SortingAlgorithmsDemo{
     }
 
 
-    public void mergeSort(int[] array) {
+    public static int[] mergeSort(int[] array) {
 
         if (array.length >= 2) {
             int[] left = new int[array.length >> 1];
             int[] right = new int[array.length - left.length];
-            System.arraycopy(array, 0, left, 0, left.length);
-            System.arraycopy(array, left.length, right, 0, right.length);
-            mergeSort(left);
-            mergeSort(right);
-            merge(array, left, right);
+
+            for (int i = 0; i < left.length; i++) {
+                left[i] = array[i];
+            }
+
+            int rightIndex = left.length;
+            for (int i = 0; i < right.length; i++) {
+                right[i] = array[rightIndex++];
+            }
+
+            return merge(mergeSort(left), mergeSort(right));
         }
+        return array;
     }
 
-    private void merge(int[] array, int[] left, int[] right) {
-
+    private static int [] merge(int[] left, int[] right) {
         int leftIndex = 0;
         int rightIndex = 0;
+        int[] array = new int[left.length + right.length];
+
         for (int i = 0; i < array.length; i++) {
             if (leftIndex < left.length && rightIndex < right.length) {
                 if (left[leftIndex] <= right[rightIndex]) {
@@ -95,6 +105,7 @@ public class SortingAlgorithmsDemo{
                 array[i] = right[rightIndex++];
             }
         }
+        return array;
 
     }
 }
