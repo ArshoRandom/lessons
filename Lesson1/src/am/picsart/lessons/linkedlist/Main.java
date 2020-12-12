@@ -3,7 +3,7 @@ package am.picsart.lessons.linkedlist;
 public class Main {
 
     public static void main(String[] args) {
-        LinkedList names = new LinkedList();
+        LinkedList<String> names = new LinkedList<>();
 
         names.add("Artur");
         names.add("Artak");
