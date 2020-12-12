@@ -2,14 +2,14 @@ package am.picsart.lessons.linkedlist;
 
 import java.util.*;
 
-public class LinkedList implements Iterable{
+public class LinkedList<T> implements Iterable<T>{
 
     private int size;
     private Node current;
     private Node first;
 
 
-    public boolean add(Object e) {
+    public boolean add(T e) {
         Node node = new Node(e);
         node.previous = current;
 
@@ -26,7 +26,7 @@ public class LinkedList implements Iterable{
         return true;
     }
 
-    public boolean add(int index, Object e) {
+    public boolean add(int index, T e) {
         if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
         } else if (index == size) {
@@ -49,7 +49,7 @@ public class LinkedList implements Iterable{
     }
 
 
-    public void addFirst(Object e){
+    public void addFirst(T e){
         Node node = new Node(e);
         node.next = this.first;
         node.previous = null;
@@ -74,11 +74,11 @@ public class LinkedList implements Iterable{
     }
 
 
-    public void addLast(Object e){
+    public void addLast(T e){
         add(e);
     }
 
-    public boolean remove(Object e) {
+    public boolean remove(T e) {
         if (Objects.isNull(e)) {
             throw new NullPointerException();
         }
@@ -123,7 +123,7 @@ public class LinkedList implements Iterable{
     }
 
 
-    public int indexOf(Object e) {
+    public int indexOf(T e) {
         Node currentNode = first;
         for (int i = 0; i < size; i++) {
             if (currentNode.data.equals(e)) {
@@ -134,7 +134,7 @@ public class LinkedList implements Iterable{
         return -1;
     }
 
-    public int lastIndexOf(Object e) {
+    public int lastIndexOf(T e) {
         Node currentNode = current;
         for (int i = size; i >= 0; i--) {
             if (currentNode.data.equals(e)) {
@@ -158,7 +158,7 @@ public class LinkedList implements Iterable{
         throw new IndexOutOfBoundsException();
     }
 
-    public boolean set(int index, Object e) {
+    public boolean set(int index, T e) {
         if (index < size && index >= 0) {
             Node currentNode = first;
             for (int i = 0; i < size; i++) {
@@ -172,23 +172,23 @@ public class LinkedList implements Iterable{
         throw new IndexOutOfBoundsException();
     }
 
-    public Object element(){
+    public T element(){
         if (size > 0){
             return current.data;
         }
         throw new NoSuchElementException();
     }
 
-    public Object peek(){
+    public T peek(){
         if (size > 0){
             return current.data;
         }
         return null;
     }
 
-    public Object poll(){
+    public T poll(){
         if (size > 0){
-            Object res = current.data;
+            T res = current.data;
             if (size == 1){
                 current = null;
             }else {
@@ -203,7 +203,7 @@ public class LinkedList implements Iterable{
 
 
 
-    public boolean contains(Object e) {
+    public boolean contains(T e) {
         return indexOf(e) >= 0;
     }
 
@@ -242,8 +242,8 @@ public class LinkedList implements Iterable{
             }
 
             @Override
-            public Object next() {
-                Object res = currentIter.data;
+            public T next() {
+                T res = currentIter.data;
                 currentIter = currentIter.next;
                 return res;
             }
@@ -253,7 +253,7 @@ public class LinkedList implements Iterable{
     }
 
     private class Node {
-        Object data;
+        T data;
         Node next;
         Node previous;
 
@@ -271,7 +271,7 @@ public class LinkedList implements Iterable{
             return Objects.hash(data);
         }
 
-        public Node(Object data) {
+        public Node(T data) {
             this.data = data;
         }
     }
