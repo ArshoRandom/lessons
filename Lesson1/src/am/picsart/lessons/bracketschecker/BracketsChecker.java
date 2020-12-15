@@ -3,16 +3,31 @@ package am.picsart.lessons.bracketschecker;
 import java.util.Stack;
 
 public class BracketsChecker {
+
+    private static final String RED_COLOR_CODE = "\u001B[31m";
+    private static final String YELLOW_COLOR_CODE = "\u001B[32m";
+    private static final String RESET_COLOR_CODE = "\u001B[0m";
+
+    /**
+     * Print data and check the correctness of brackets signature
+     * if everything is ok , data will be printed
+     * otherwise if bracket closed incorrectly it will be printed red
+     * if bracket opened but not closed ,
+     * than required bracket will be printed yellow
+     * if bracket closed without being opened ,
+     * than closer bracket will be printed red
+     *
+     * @param data checked data
+     */
+
     public static void check(String data) {
 
         Stack<Character> brackets = new Stack<>();
         char[] symbols = data.toCharArray();
 
-        for (int i = 0; i < symbols.length; i++) {
+        for (char symbol : symbols) {
 
-            char symbol = symbols[i];
-
-            if (symbol == '[' || symbol == '(' || symbol == '{'){
+            if (symbol == '[' || symbol == '(' || symbol == '{') {
                 brackets.push(symbol);
             }
 
@@ -20,68 +35,100 @@ public class BracketsChecker {
                 case ']': {
                     //closed but not opened
                     if (brackets.isEmpty()) {
-                        printMessageForRequirement('[');
+                        printMessageForMistake(symbol);
                     } else {
                         //opened but closed with error
                         char current = brackets.pop();
                         if (current != '[') {
-                            printMessageForMistake(i + 1,getCloserBracket(current), ']');
+                            printMessageForMistake(symbol);
+                        } else {
+                            System.out.print(symbol);
                         }
                     }
                     break;
                 }
                 case '}': {
                     if (brackets.isEmpty()) {
-                        printMessageForRequirement('{');
+                        printMessageForMistake(symbol);
                     } else {
                         char current = brackets.pop();
                         if (current != '{') {
-                            printMessageForMistake(i + 1,getCloserBracket(current), '}');
+                            printMessageForMistake(symbol);
+                        } else {
+                            System.out.print(symbol);
                         }
                     }
                     break;
                 }
                 case ')': {
                     if (brackets.isEmpty()) {
-                        printMessageForRequirement('(');
+                        printMessageForMistake(symbol);
                     } else {
                         char current = brackets.pop();
                         if (current != '(') {
-                            printMessageForMistake(i + 1,getCloserBracket(current), ')');
+                            printMessageForMistake(symbol);
+                        } else {
+                            System.out.print(symbol);
                         }
                     }
                     break;
                 }
+                default:
+                    System.out.print(symbol);
             }
+
         }
 
         // opened but not closed
-        for(char opener : brackets){
+        for (char opener : brackets) {
             printMessageForRequirement(getCloserBracket(opener));
         }
 
     }
 
-    private static char getCloserBracket(char opener){
-        switch (opener){
-            case '{' : return '}';
-            case '[' : return ']';
-            case '(' : return ')';
+
+    /**
+     * Return corresponding closer bracket
+     *
+     * @param opener opener bracket
+     */
+    private static char getCloserBracket(char opener) {
+        switch (opener) {
+            case '{':
+                return '}';
+            case '[':
+                return ']';
+            case '(':
+                return ')';
         }
         throw new RuntimeException("Invalid symbol " + opener);
     }
 
 
-
-    private static void printMessageForMistake(int index, char require, char exists) {
-        System.out.println("Error on position : " + index + " ( Required '" + require + "' , exists '" + exists + "' )");
+    /**
+     * printing red incorrect symbol
+     *
+     * @param incorrectSymbol incorrect symbol
+     */
+    private static void printMessageForMistake(char incorrectSymbol) {
+        System.out.print(RED_COLOR_CODE);
+        System.out.print(incorrectSymbol);
+        System.out.print(RESET_COLOR_CODE);
     }
 
-    private static void printMessageForRequirement(char symbol) {
-        System.out.println("Error : ( Required '" + symbol + "' )");
+
+    /**
+     * printing green required symbol
+     *
+     * @param requiredSymbol required symbol
+     */
+    private static void printMessageForRequirement(char requiredSymbol) {
+        System.out.print(YELLOW_COLOR_CODE);
+        System.out.print(requiredSymbol);
+        System.out.print(RESET_COLOR_CODE);
     }
 
     public static void main(String[] args) {
-        check("{{{");
+        check("{fwef)");
     }
 }
