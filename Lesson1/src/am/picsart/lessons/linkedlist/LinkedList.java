@@ -2,7 +2,7 @@ package am.picsart.lessons.linkedlist;
 
 import java.util.*;
 
-public class LinkedList<T> implements Iterable<T>{
+public class LinkedList<T> implements Iterable<T> {
 
     private int size;
     private Node current;
@@ -49,7 +49,7 @@ public class LinkedList<T> implements Iterable<T>{
     }
 
 
-    public void addFirst(T e){
+    public void addFirst(T e) {
         Node node = new Node(e);
         node.next = this.first;
         node.previous = null;
@@ -58,33 +58,30 @@ public class LinkedList<T> implements Iterable<T>{
     }
 
 
-    public Object getFirst(){
-        if (size == 0){
+    public Object getFirst() {
+        if (size == 0) {
             throw new NoSuchElementException();
         }
         return first.data;
     }
 
 
-    public Object getLast(){
-        if (size == 0){
+    public Object getLast() {
+        if (size == 0) {
             throw new NoSuchElementException();
         }
         return current.data;
     }
 
 
-    public void addLast(T e){
+    public void addLast(T e) {
         add(e);
     }
 
     public boolean remove(T e) {
-        if (Objects.isNull(e)) {
-            throw new NullPointerException();
-        }
         Node currentNode = first;
         while (currentNode != null) {
-            if (currentNode.data.equals(e)) {
+            if (equalsWithNull(currentNode.data, e)) {
                 currentNode.next.previous = currentNode.previous;
                 currentNode.previous.next = currentNode.next;
                 size--;
@@ -126,7 +123,7 @@ public class LinkedList<T> implements Iterable<T>{
     public int indexOf(T e) {
         Node currentNode = first;
         for (int i = 0; i < size; i++) {
-            if (currentNode.data.equals(e)) {
+            if (equalsWithNull(currentNode.data, e)) {
                 return i;
             }
             currentNode = currentNode.next;
@@ -136,8 +133,8 @@ public class LinkedList<T> implements Iterable<T>{
 
     public int lastIndexOf(T e) {
         Node currentNode = current;
-        for (int i = size; i >= 0; i--) {
-            if (currentNode.data.equals(e)) {
+        for (int i = size - 1; i >= 0; i--) {
+            if (equalsWithNull(currentNode.data, e)) {
                 return i;
             }
             currentNode = currentNode.previous;
@@ -172,26 +169,26 @@ public class LinkedList<T> implements Iterable<T>{
         throw new IndexOutOfBoundsException();
     }
 
-    public T element(){
-        if (size > 0){
+    public T element() {
+        if (size > 0) {
             return current.data;
         }
         throw new NoSuchElementException();
     }
 
-    public T peek(){
-        if (size > 0){
+    public T peek() {
+        if (size > 0) {
             return current.data;
         }
         return null;
     }
 
-    public T poll(){
-        if (size > 0){
+    public T poll() {
+        if (size > 0) {
             T res = current.data;
-            if (size == 1){
+            if (size == 1) {
                 current = null;
-            }else {
+            } else {
                 current.previous.next = null;
                 current = current.previous;
             }
@@ -200,7 +197,6 @@ public class LinkedList<T> implements Iterable<T>{
         }
         return null;
     }
-
 
 
     public boolean contains(T e) {
@@ -217,22 +213,22 @@ public class LinkedList<T> implements Iterable<T>{
 
     @Override
     public String toString() {
-        if (size == 0){
+        if (size == 0) {
             return "[]";
         }
-        StringBuilder builder = new StringBuilder();
-        builder.append("[ ");
+        StringBuilder builder = new StringBuilder("[");
+
         Node currentNode = this.first;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size - 1; i++) {
             builder.append(currentNode.data).append(", ");
             currentNode = currentNode.next;
         }
-       return builder.deleteCharAt(builder.lastIndexOf(",")).append("]").toString();
+        return builder.append(current.data).append("]").toString();
     }
 
     @Override
-    public Iterator iterator() {
-        Iterator iterator = new Iterator() {
+    public Iterator<T> iterator() {
+        Iterator<T> iterator = new Iterator<>() {
 
             private Node currentIter = first;
 
@@ -249,7 +245,7 @@ public class LinkedList<T> implements Iterable<T>{
             }
         };
 
-       return iterator;
+        return iterator;
     }
 
     private class Node {
@@ -274,6 +270,10 @@ public class LinkedList<T> implements Iterable<T>{
         public Node(T data) {
             this.data = data;
         }
+    }
+
+    private boolean equalsWithNull(T a, T b) {
+        return (Objects.isNull(a) && Objects.isNull(b)) || (Objects.nonNull(a) && a.equals(b));
     }
 
 }

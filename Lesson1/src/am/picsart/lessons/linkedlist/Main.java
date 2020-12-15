@@ -41,11 +41,22 @@ public class Main {
         System.out.println("Get element with index 1");
         System.out.println(names.get(1) + " index is 1");
 
+        names.add(null);
+        names.add(null);
+        names.add(null);
+        names.remove(null);
+
+        System.out.println(names.remove("unknown value"));
+
         System.out.println();
+        System.out.println(names.indexOf(null));
+        System.out.println(names.lastIndexOf(null));
         System.out.println("Iterate objects");
         for (Object object : names){
             System.out.println(object);
         }
+
+
 
     }
 
